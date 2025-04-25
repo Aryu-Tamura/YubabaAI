@@ -17,3 +17,6 @@
 以下のURLから試せます。
 
 https://yubabaai-1.onrender.com/
+
+
+![image](https://github.com/user-attachments/assets/5f6ab38d-85a2-4235-acff-77fec5016449)
