@@ -19,10 +19,13 @@
             to { opacity: 1; transform: translateY(0); }
         }
         .yubaba-image {
-            max-width: 300px; /* 最大幅を少し広げても良いかもしれません */
+            max-width: 300px;
             height: auto;
             border-radius: 0.5rem;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            /* margin: 1rem auto; は mx-auto で代替されるのでコメントアウトまたは削除してもOK */
+            margin-top: 1rem;
+            margin-bottom: 1rem;
         }
         .yubaba-button {
             background-color: #8b4513;
@@ -66,20 +69,20 @@
         <h1 class="text-3xl font-bold mb-6 text-[#8b4513]">湯婆婆AI</h1>
 
         <div id="screen1" class="fade-in">
-            <img id="image-area1" src="picture1.jpg" alt="湯婆婆の画像 (画面1)" class="yubaba-image">
+            <img id="image-area1" src="picture1.jpg" alt="湯婆婆の画像 (画面1)" class="yubaba-image block mx-auto">
             <p id="text-area1" class="text-lg mb-4">さあ、契約書だよ。ぐずぐずしないでさっさと名前を書きな！</p>
             <input type="text" id="name-input" class="yubaba-input mb-4 mx-auto block" placeholder="あなたの名前" maxlength="30">
             <button id="submit-button" class="yubaba-button">名前を提出する</button>
         </div>
 
         <div id="screen2" class="hidden fade-in">
-             <img id="image-area2" src="picture2.jpg" alt="湯婆婆の画像 (画面2)" class="yubaba-image">
+             <img id="image-area2" src="picture2.jpg" alt="湯婆婆の画像 (画面2)" class="yubaba-image block mx-auto">
             <p id="text-area2" class="text-lg mb-4"></p>
             <button id="next-button" class="yubaba-button">次へ</button>
         </div>
 
         <div id="screen3" class="hidden fade-in">
-            <img id="image-area3" src="picture3.jpg" alt="湯婆婆の画像 (画面3)" class="yubaba-image">
+            <img id="image-area3" src="picture3.jpg" alt="湯婆婆の画像 (画面3)" class="yubaba-image block mx-auto">
             <p id="text-area3" class="text-lg mb-4"></p>
             <button id="restart-button" class="yubaba-button">もう一度</button>
         </div>
@@ -113,15 +116,15 @@
         let originalName = '';
         let newName = '';
 
-        // --- 画像パスの設定 (更新) ---
-        // ★★★ 新しい画像ファイル名に更新 ★★★
-        const screen1ImageUrl = 'picture1.jpg'; // 画面1の画像
-        const screen2ImageUrl = 'picture2.jpg'; // 画面2の画像
-        const screen3ImageUrl = 'picture3.jpg'; // 画面3の画像
+        // --- 画像パスの設定 ---
+        const screen1ImageUrl = 'picture1.jpg';
+        const screen2ImageUrl = 'picture2.jpg';
+        const screen3ImageUrl = 'picture3.jpg';
 
         // --- バックエンドAPIのエンドポイント ---
         // RenderでデプロイしたバックエンドのURLに書き換えてください
-        const apiUrl = 'https://yubabaai.onrender.com/api/generate-name';; // ← デプロイ後に要変更！
+        // 例: const apiUrl = 'https://your-backend-name.onrender.com/api/generate-name';
+        const apiUrl = 'https://yubabaai.onrender.com/api/generate-name'; // 前回設定したURL (仮)
 
         // --- イベントリスナー ---
         submitButton.addEventListener('click', async () => {
@@ -167,7 +170,7 @@
             showScreen1();
         });
 
-        // --- 画面切り替え関数 (画像設定を更新) ---
+        // --- 画面切り替え関数 ---
         function showScreen1() {
             screen1.classList.remove('hidden');
             screen2.classList.add('hidden');
@@ -175,9 +178,8 @@
             nameInput.value = '';
             originalName = '';
             newName = '';
-            // ★★★ 画面1の画像を設定 ★★★
             imageArea1.src = screen1ImageUrl;
-            imageArea1.alt = "湯婆婆の画像 (画面1)"; // altテキスト更新
+            imageArea1.alt = "湯婆婆の画像 (画面1)";
             textArea1.textContent = "さあ、契約書だよ。ぐずぐずしないでさっさと名前を書きな！";
             hideError();
         }
@@ -186,9 +188,8 @@
             screen1.classList.add('hidden');
             screen2.classList.remove('hidden');
             screen3.classList.add('hidden');
-            // ★★★ 画面2の画像を設定 ★★★
             imageArea2.src = screen2ImageUrl;
-            imageArea2.alt = "湯婆婆の画像 (画面2)"; // altテキスト更新
+            imageArea2.alt = "湯婆婆の画像 (画面2)";
             textArea2.textContent = `フン、${originalName}というのかい？贅沢な名だねぇ。`;
         }
 
@@ -196,9 +197,8 @@
             screen1.classList.add('hidden');
             screen2.classList.add('hidden');
             screen3.classList.remove('hidden');
-            // ★★★ 画面3の画像を設定 ★★★
             imageArea3.src = screen3ImageUrl;
-            imageArea3.alt = "湯婆婆の画像 (画面3)"; // altテキスト更新
+            imageArea3.alt = "湯婆婆の画像 (画面3)";
             textArea3.textContent = `今日からおまえの名前は${newName}だ。いいかい、${newName}だよ。分かったら返事をするんだ、${newName}！！`;
         }
 
