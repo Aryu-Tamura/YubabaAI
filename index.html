@@ -23,7 +23,6 @@
             height: auto;
             border-radius: 0.5rem;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            margin: 1rem auto;
         }
         .yubaba-button {
             background-color: #8b4513;
@@ -122,7 +121,7 @@
 
         // --- バックエンドAPIのエンドポイント ---
         // RenderでデプロイしたバックエンドのURLに書き換えてください
-        const apiUrl = 'http://127.0.0.1:8000/api/generate-name'; // ← デプロイ後に要変更！
+        const apiUrl = 'https://yubabaai.onrender.com/api/generate-name';; // ← デプロイ後に要変更！
 
         // --- イベントリスナー ---
         submitButton.addEventListener('click', async () => {
